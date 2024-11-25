@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bu0pluk2l5prl"]
+
+[ext_resource type="Script" path="res://src/SaveManager/sysmatic_save_manager.gd" id="1_j8oog"]
+
+[node name="SysmaticSaveManager" type="Node"]
+script = ExtResource("1_j8oog")
