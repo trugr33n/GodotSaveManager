@@ -21,14 +21,14 @@ func InitSave(name_value: String = "SSM_null_save") -> void:
 	var dir : DirAccess = DirAccess.open("user://")
 	dir.make_dir(name_value)
 	CreateScreenshot(name_value)
-	var _gameFile : FileAccess = FileAccess.open("user://"+name_value+"/game.ssm", FileAccess.WRITE)
+	var _gameFile : FileAccess = FileAccess.open_encrypted_with_pass("user://"+name_value+"/game.ssm", FileAccess.WRITE, "Kommacat")
 	var json_string : String = JSON.stringify(save_template)
 	_gameFile.store_line(json_string)
 
 func LoadSave(name_value: String = "SSM_null_save") -> void:
 	if !IsFileAlive("user://"+name_value+"/game.ssm"):
 		return
-	var _gameFile : FileAccess = FileAccess.open("user://"+name_value+"/game.ssm", FileAccess.READ)
+	var _gameFile : FileAccess = FileAccess.open_encrypted_with_pass("user://"+name_value+"/game.ssm", FileAccess.READ, "Kommacat")
 	
 	while _gameFile.get_position() < _gameFile.get_length():
 		var json_string : String = _gameFile.get_line()
