@@ -23,6 +23,11 @@ func SaveInfoUpdate() -> void:
 	SSM.save_template["time"] = _inputScreen._timeBox.text if !_inputScreen._timeBox.text.is_empty() else "Zero"
 	SSM.save_template["stringed_data"] = _inputScreen._stringedDataBox.text if !_inputScreen._stringedDataBox.text.is_empty() else "Zero"
 
+func UpdateInfo() -> void:
+	_outputScreen._nameBox.text = SSM.current_loaded_dir["name"]
+	_outputScreen._timeBox.text = SSM.current_loaded_dir["time"]
+	_outputScreen._stringedDataBox.text = SSM.current_loaded_dir["stringed_data"]
+
 func OnAddButtonPressed() -> void:
 	SaveInfoUpdate()
 	SSM.InitSave(_fileName+str(_nextID))
@@ -33,8 +38,4 @@ func OnAddButtonPressed() -> void:
 
 func SaveFoldersContainerItemSelected(index: int) -> void:
 	SSM.LoadSave(_fileName+str(index))
-	print(SSM.current_loaded_dir)
-	
-	_outputScreen._nameBox.text = SSM.current_loaded_dir["name"]
-	_outputScreen._timeBox.text = SSM.current_loaded_dir["time"]
-	_outputScreen._stringedDataBox.text = SSM.current_loaded_dir["stringed_data"]
+	UpdateInfo()

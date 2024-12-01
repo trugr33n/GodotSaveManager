@@ -20,6 +20,7 @@ func InitSettings() -> void:
 func InitSave(name_value: String = "SSM_null_save") -> void:
 	var dir : DirAccess = DirAccess.open("user://")
 	dir.make_dir(name_value)
+	CreateScreenshot(name_value)
 	var _gameFile : FileAccess = FileAccess.open("user://"+name_value+"/game.ssm", FileAccess.WRITE)
 	var json_string : String = JSON.stringify(save_template)
 	_gameFile.store_line(json_string)
@@ -34,7 +35,12 @@ func LoadSave(name_value: String = "SSM_null_save") -> void:
 		var json : JSON = JSON.new()
 		var parsed_result : int = json.parse(json_string)
 		current_loaded_dir = json.data
-	
+
+func CreateScreenshot(name_value: String) -> void:
+	var _screenshotPath : String = "user://"+name_value+"/preview.jpg"
+	var image : Image = get_viewport().get_texture().get_image()
+	image.save_jpg(_screenshotPath)
+	save_template["preview"] = _screenshotPath
 
 func IsFileAlive(path_value: String = "user://SSM_null_save/game.ssm") -> bool:
 	return true if FileAccess.file_exists(path_value) else false
