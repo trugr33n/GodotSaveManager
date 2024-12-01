@@ -1,0 +1,162 @@
+[gd_scene load_steps=6 format=3 uid="uid://crdloji8hwdfn"]
+
+[ext_resource type="Script" path="res://src/TestSubject/control.gd" id="1_lwxdv"]
+[ext_resource type="Script" path="res://src/TestSubject/input_screen.gd" id="2_l4jn1"]
+[ext_resource type="Script" path="res://src/TestSubject/output_screen.gd" id="3_4sh5u"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_aj2wh"]
+font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_cmdjt"]
+font_size = 20
+
+[node name="UI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lwxdv")
+
+[node name="SaveFoldersContainer" type="ItemList" parent="."]
+layout_mode = 0
+offset_right = 454.0
+offset_bottom = 478.0
+
+[node name="AddButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -228.0
+offset_right = 163.0
+offset_bottom = -187.0
+grow_vertical = 0
+text = "Add"
+
+[node name="RemoveButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 177.0
+offset_top = -228.0
+offset_right = 340.0
+offset_bottom = -187.0
+grow_vertical = 0
+text = "Remove"
+
+[node name="InputScreen" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -500.0
+offset_bottom = 324.0
+grow_horizontal = 0
+script = ExtResource("2_l4jn1")
+
+[node name="InputScreenName" type="Label" parent="InputScreen"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "Input Screen"
+label_settings = SubResource("LabelSettings_aj2wh")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Container" type="VBoxContainer" parent="InputScreen"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -88.0
+offset_right = 500.0
+offset_bottom = 88.0
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="NameBox" type="TextEdit" parent="InputScreen/Container"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+placeholder_text = "Name goes here"
+scroll_past_end_of_file = true
+
+[node name="TimeBox" type="TextEdit" parent="InputScreen/Container"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+placeholder_text = "Time goes here"
+scroll_past_end_of_file = true
+
+[node name="StringedDataBox" type="TextEdit" parent="InputScreen/Container"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+placeholder_text = "Stringed data goes here"
+scroll_past_end_of_file = true
+
+[node name="OutputScreen" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -500.0
+offset_top = -324.0
+grow_horizontal = 0
+grow_vertical = 0
+script = ExtResource("3_4sh5u")
+
+[node name="OutputScreenName" type="Label" parent="OutputScreen"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "Output Screen"
+label_settings = SubResource("LabelSettings_cmdjt")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Container" type="VBoxContainer" parent="OutputScreen"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -88.0
+offset_right = 500.0
+offset_bottom = 88.0
+grow_vertical = 2
+
+[node name="NameBox" type="TextEdit" parent="OutputScreen/Container"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+placeholder_text = "Name goes out from file"
+editable = false
+scroll_past_end_of_file = true
+
+[node name="TimeBox" type="TextEdit" parent="OutputScreen/Container"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+placeholder_text = "Time goes out from file"
+editable = false
+scroll_past_end_of_file = true
+
+[node name="StringedDataBox" type="TextEdit" parent="OutputScreen/Container"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+placeholder_text = "Stringed data goes out from file"
+editable = false
+scroll_past_end_of_file = true
+
+[connection signal="item_selected" from="SaveFoldersContainer" to="." method="SaveFoldersContainerItemSelected"]
+[connection signal="pressed" from="AddButton" to="." method="OnAddButtonPressed"]
